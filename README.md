@@ -6,6 +6,8 @@ GitOps Repository for deploy the [ChatBot Demo of ARO and Azure OpenAI](https://
 
 This repository contains the necessary configurations and instructions for deploying a ChatBot Demo using Azure Red Hat OpenShift (ARO) and Azure OpenAI services using GitOps. 
 
+![Azure OpenAI App within ARO Cluster - 1](./assets/aro-azureopenai-1.png)
+
 Below is an overview of the steps and prerequisites needed for deployment.
 
 ## Prerequisites to deploy the ChatBot Demo
