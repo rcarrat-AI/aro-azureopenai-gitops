@@ -38,3 +38,30 @@ This command applies the Kubernetes manifests defined in the gitops/ directory. 
 ![Azure OpenAI App within ARO Cluster - 2](./assets/aro-azureopenai-2.png)
 
 The above process illustrates the GitOps workflow for deploying applications on Kubernetes, leveraging Azure OpenAI and ARO. 
+
+## Azure OpenAI credentials into Kubernetes secrets
+
+We need to add the Kubernetes Secret into ARO to access the Azure OpenAI GPT model deployed. 
+
+* First, set your environment variables with the plain text values in your terminal:
+
+```md
+export OPENAI_API_BASE="https://MY_FANCY_URL.openai.azure.com/"
+export OPENAI_API_KEY="your-api-key"
+export NAMESPACE="aro-azureopenai"
+```
+
+* Deploy the secret in the namespace
+
+```md
+cat <<EOF | kubectl apply -n $NAMESPACE -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azure-openai
+type: Opaque
+data:
+  OPENAI_API_BASE: $(echo -n "$OPENAI_API_BASE" | base64)
+  OPENAI_API_KEY: $(echo -n "$OPENAI_API_KEY" | base64)
+EOF
+```
